@@ -198,8 +198,9 @@ func (c *Client) execCommand(cmd string) (res []byte, err error) {
 		err = errors.New("invalid cmd")
 		return
 	}
-	cmd_list := strings.Fields(strings.TrimSpace(cmd))
-	exp := exec.Command(cmd_list[0], cmd_list[1:]...)
+	exp := exec.Command("sh", "-c", strings.TrimSpace(cmd))
+	//cmd_list := strings.Fields(strings.TrimSpace(cmd))
+	//exp := exec.Command(cmd_list[0], cmd_list[1:]...)
 	go func() {
 		time.Sleep(time.Second * CommandTimeOut)
 		exp.Process.Kill()
